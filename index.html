@@ -143,7 +143,7 @@
   .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
   .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px,4vw,44px); font-weight: 300; color: var(--text-primary); line-height: 1.15; letter-spacing: -0.01em; }
   .services-note { font-size: 13px; color: var(--text-muted); font-weight: 300; max-width: 280px; text-align: right; line-height: 1.6; }
-  .tiers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; align-items: start; }
+  .tiers-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; align-items: start; }
   .tier { background: #fff; border: 0.5px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.2s; }
   .tier:hover { transform: translateY(-3px); }
   .tier.featured { border: 1.5px solid var(--text-primary); }
@@ -152,6 +152,7 @@
   .badge-free { background: var(--green-bg); color: var(--green); }
   .badge-popular { background: var(--navy); color: var(--gold-light); }
   .badge-team { background: var(--warm-gray); color: var(--text-secondary); }
+  .badge-starter { background: var(--warm-gray); color: var(--text-secondary); }
   .tier-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; line-height: 1.2; }
   .tier-price { font-size: 13px; font-weight: 500; }
   .tier-price.free { color: var(--green); }
@@ -204,7 +205,7 @@
     .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 64px; }
     .hero-visual { display: grid; grid-template-columns: repeat(3,1fr); }
     .about { grid-template-columns: 1fr; gap: 40px; }
-    .tiers-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .tiers-grid { grid-template-columns: repeat(2,1fr); max-width: 700px; margin: 0 auto; }
     .how-grid { grid-template-columns: repeat(2,1fr); }
     .how-step::after { display: none; }
     .services-note { text-align: left; }
@@ -375,13 +376,32 @@
   <div class="services-header">
     <div>
       <p class="section-label">Services</p>
-      <h2 class="section-title serif">Three ways<br>to work together.</h2>
+      <h2 class="section-title serif">Four ways<br>to work together.</h2>
     </div>
     <p class="services-note">Every engagement begins with a diagnostic. Pricing is transparent — no surprises after the conversation.</p>
   </div>
   <div class="tiers-grid">
  
     <div class="tier fade-in">
+      <div class="tier-header">
+        <span class="tier-badge badge-starter">Focused &middot; Single system</span>
+        <h3 class="tier-name serif">Starter<br>Setup</h3>
+        <p class="tier-price paid">$500 &ndash; $800</p>
+      </div>
+      <div class="tier-body">
+        <p class="tier-desc">One focused system built and configured for your business. Ideal for owners who know exactly what needs fixing and want a clean, working solution without a full backend overhaul. Scoped on the diagnostic call, delivered in two weeks.</p>
+        <ul class="tier-features">
+          <li>One system built (pipeline, workspace, or automation)</li>
+          <li>Tool configured and connected to your workflow</li>
+          <li>Plain-language handoff guide</li>
+          <li>One round of revisions included</li>
+          <li>Natural entry point to Foundation Build</li>
+        </ul>
+        <a href="https://calendly.com/euleaverse/30min" target="_blank" class="tier-btn outline">Start with a diagnostic</a>
+      </div>
+    </div>
+ 
+        <div class="tier fade-in">
       <div class="tier-header">
         <span class="tier-badge badge-free">Free · Starting point</span>
         <h3 class="tier-name serif">Business Clarity<br>Diagnostic</h3>
