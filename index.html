@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems Studio Workshop — Euleanne Espinal</title>
+<meta name="description" content="Backend organization, workflows, operations, and systems support for service-based businesses. Book a free Business Clarity Diagnostic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --gold: #B8922A;
+    --gold-light: #F5EDD8;
+    --gold-mid: #D4A843;
+    --warm-white: #FAF8F5;
+    --warm-gray: #F1EFE8;
+    --mid-gray: #888780;
+    --border: #E2DDD6;
+    --border-dark: #C8C3B8;
+    --text-primary: #1A1A18;
+    --text-secondary: #5F5E5A;
+    --text-muted: #9A9890;
+    --green: #2D5A1B;
+    --green-bg: #EDF5E8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,248,245,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 max(24px, calc((100% - 1100px) / 2));
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 400;
+    color: var(--text-primary); text-decoration: none; letter-spacing: 0.01em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 400;
+    color: var(--text-secondary); text-decoration: none;
+    letter-spacing: 0.02em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    background: var(--text-primary) !important; color: var(--warm-white) !important;
+    padding: 8px 18px; border-radius: 4px;
+    font-size: 12px !important; font-weight: 500 !important;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .nav-cta:hover { background: var(--navy) !important; }
+
+  .hero {
+    padding: 96px max(24px, calc((100% - 1100px) / 2)) 80px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    border-bottom: 0.5px solid var(--border);
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 72px); font-weight: 300;
+    line-height: 1.08; letter-spacing: -0.02em;
+    color: var(--text-primary); margin-bottom: 24px;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-body {
+    font-size: 15px; font-weight: 300;
+    color: var(--text-secondary); line-height: 1.8;
+    margin-bottom: 36px; max-width: 440px;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn-primary {
+    display: inline-block; background: var(--text-primary); color: var(--warm-white);
+    padding: 14px 28px; border-radius: 4px; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--navy); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-block; color: var(--text-secondary); font-size: 13px; font-weight: 400;
+    text-decoration: none; border-bottom: 1px solid var(--border-dark); padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+  .hero-visual { display: flex; flex-direction: column; gap: 14px; }
+  .hero-card {
+    background: #fff; border: 0.5px solid var(--border);
+    border-radius: 12px; padding: 20px 24px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards;
+  }
+  .hero-card:nth-child(1) { animation-delay: 0.2s; }
+  .hero-card:nth-child(2) { animation-delay: 0.35s; }
+  .hero-card:nth-child(3) { animation-delay: 0.5s; }
+  .hero-card-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .hero-card-value { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--text-primary); }
+  .hero-card-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .hero-card.accent { background: var(--navy); border-color: var(--navy); }
+  .hero-card.accent .hero-card-label { color: rgba(255,255,255,0.4); }
+  .hero-card.accent .hero-card-value { color: var(--gold-light); }
+  .hero-card.accent .hero-card-sub { color: rgba(255,255,255,0.4); }
+
+  .about {
+    padding: 88px max(24px, calc((100% - 1100px) / 2));
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 80px; align-items: start;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .about-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+  .about-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,48px); font-weight: 300; line-height: 1.15; color: var(--text-primary); letter-spacing: -0.01em; }
+  .gold-rule { width: 40px; height: 2px; background: var(--gold); margin: 28px 0; }
+  .about-body { font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
+  .about-body strong { color: var(--text-primary); font-weight: 500; }
+  .about-quote { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-style: italic; font-weight: 300; color: var(--text-primary); line-height: 1.5; border-left: 2px solid var(--gold); padding-left: 20px; margin-top: 32px; border-radius: 0; }
+
+  .services { padding: 88px max(24px, calc((100% - 1100px) / 2)); border-bottom: 0.5px solid var(--border); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 52px; flex-wrap: wrap; gap: 20px; }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px,4vw,44px); font-weight: 300; color: var(--text-primary); line-height: 1.15; letter-spacing: -0.01em; }
+  .services-note { font-size: 13px; color: var(--text-muted); font-weight: 300; max-width: 280px; text-align: right; line-height: 1.6; }
+  .tiers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; align-items: start; }
+  .tier { background: #fff; border: 0.5px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.2s; }
+  .tier:hover { transform: translateY(-3px); }
+  .tier.featured { border: 1.5px solid var(--text-primary); }
+  .tier-header { padding: 28px 24px 20px; border-bottom: 0.5px solid var(--border); }
+  .tier-badge { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: 14px; }
+  .badge-free { background: var(--green-bg); color: var(--green); }
+  .badge-popular { background: var(--navy); color: var(--gold-light); }
+  .badge-team { background: var(--warm-gray); color: var(--text-secondary); }
+  .tier-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; line-height: 1.2; }
+  .tier-price { font-size: 13px; font-weight: 500; }
+  .tier-price.free { color: var(--green); }
+  .tier-price.paid { color: var(--text-primary); }
+  .tier-body { padding: 24px; }
+  .tier-desc { font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75; margin-bottom: 20px; min-height: 80px; }
+  .tier-features { list-style: none; margin-bottom: 24px; }
+  .tier-features li { font-size: 12px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .tier-features li:last-child { border-bottom: none; }
+  .tier-features li::before { content: '—'; color: var(--gold); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+  .tier-btn { display: block; width: 100%; text-align: center; padding: 13px; border-radius: 6px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; cursor: pointer; }
+  .tier-btn.dark { background: var(--text-primary); color: var(--warm-white); border: none; }
+  .tier-btn.dark:hover { background: var(--navy); }
+  .tier-btn.outline { background: transparent; color: var(--text-primary); border: 1px solid var(--border-dark); }
+  .tier-btn.outline:hover { border-color: var(--text-primary); background: var(--warm-gray); }
+  .tier-btn + .tier-btn { margin-top: 8px; }
+
+  .how { padding: 88px max(24px, calc((100% - 1100px) / 2)); border-bottom: 0.5px solid var(--border); background: var(--warm-gray); }
+  .how-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; margin-top: 52px; }
+  .how-step { position: relative; }
+  .how-step::after { content: ''; position: absolute; top: 20px; right: -16px; width: 32px; height: 1px; background: var(--border-dark); }
+  .how-step:last-child::after { display: none; }
+  .how-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 16px; }
+  .how-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 8px; }
+  .how-desc { font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.7; }
+
+  .footer-cta { background: var(--navy); padding: 88px max(24px, calc((100% - 1100px) / 2)); text-align: center; }
+  .footer-cta-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+  .footer-cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,5vw,56px); font-weight: 300; color: var(--gold-light); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .footer-cta-title em { font-style: italic; color: var(--gold); }
+  .footer-cta-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.45); margin-bottom: 40px; line-height: 1.7; }
+  .footer-cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 28px; }
+  .btn-gold { display: inline-block; background: var(--gold); color: var(--navy); padding: 15px 32px; border-radius: 4px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+  .btn-gold:hover { background: var(--gold-mid); transform: translateY(-1px); }
+  .btn-ghost { display: inline-block; color: rgba(255,255,255,0.55); font-size: 13px; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 15px 0 2px; transition: color 0.2s; }
+  .btn-ghost:hover { color: #fff; }
+  .footer-cta-note { font-size: 11px; color: rgba(255,255,255,0.22); letter-spacing: 0.04em; }
+
+  footer { background: #111110; padding: 28px max(24px, calc((100% - 1100px) / 2)); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+  .footer-left { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: rgba(255,255,255,0.3); }
+  .footer-links { display: flex; gap: 24px; list-style: none; }
+  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em; }
+  .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 64px; }
+    .hero-visual { display: grid; grid-template-columns: repeat(3,1fr); }
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    .tiers-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .how-grid { grid-template-columns: repeat(2,1fr); }
+    .how-step::after { display: none; }
+    .services-note { text-align: left; }
+  }
+  @media (max-width: 600px) {
+    .hero-visual { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr; }
+    .nav-links li:not(:last-child) { display: none; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-cta-actions { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Systems Studio <span>Workshop</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="https://calendly.com/euleaverse/30min" target="_blank" class="nav-cta">Book diagnostic</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Systems Studio Workshop</p>
+    <h1 class="hero-title serif">Chaos to order.<br><em>Built for your<br>business.</em></h1>
+    <p class="hero-body">Most small business problems are systems problems in disguise. Poor follow-up, inconsistent client experience, founder burnout — these come from the absence of organized, repeatable infrastructure. We build that infrastructure.</p>
+    <div class="hero-actions">
+      <a href="https://tally.so/r/aQZzJB" target="_blank" class="btn-primary">Start with a free diagnostic</a>
+      <a href="#services" class="btn-secondary">See all services</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <p class="hero-card-label">Starting point</p>
+      <p class="hero-card-value serif">Business Clarity Diagnostic</p>
+      <p class="hero-card-sub">Complimentary · No obligation</p>
+    </div>
+    <div class="hero-card accent">
+      <p class="hero-card-label">What we build</p>
+      <p class="hero-card-value serif">Pipelines · Automations · SOPs</p>
+      <p class="hero-card-sub">Systems that run without you</p>
+    </div>
+    <div class="hero-card">
+      <p class="hero-card-label">Delivery timeline</p>
+      <p class="hero-card-value serif">4-week foundation build</p>
+      <p class="hero-card-sub">Defined scope · Clear handoff</p>
+    </div>
+  </div>
+</section>
+
+<section class="about fade-in" id="about">
+  <div>
+    <p class="about-label">What this is</p>
+    <h2 class="about-title serif">The method<br>is the product.</h2>
+    <div class="gold-rule"></div>
+  </div>
+  <div>
+    <p class="about-body">Systems Studio Workshop is an operations and systems consulting practice for <strong>service-based businesses that have outgrown their current infrastructure</strong> — or never built one to begin with.</p>
+    <p class="about-body">We enter where things feel heavy: scattered leads, manual follow-up, no clear process, founders carrying the business entirely in their heads. We map what's actually happening, identify what's breaking, and build the backend that makes the business predictable.</p>
+    <p class="about-body">Every engagement starts with a diagnostic. Every diagnostic produces a written assessment — regardless of whether you continue. The value is immediate. The build is optional.</p>
+    <blockquote class="about-quote serif">"Coherence is the principle.<br>The domain is the variable."</blockquote>
+  </div>
+</section>
+
+<section class="services fade-in" id="services">
+  <div class="services-header">
+    <div>
+      <p class="section-label">Services</p>
+      <h2 class="section-title serif">Three ways<br>to work together.</h2>
+    </div>
+    <p class="services-note">Every engagement begins with a diagnostic. Pricing is transparent — no surprises after the conversation.</p>
+  </div>
+  <div class="tiers-grid">
+
+    <div class="tier fade-in">
+      <div class="tier-header">
+        <span class="tier-badge badge-free">Free · Starting point</span>
+        <h3 class="tier-name serif">Business Clarity<br>Diagnostic</h3>
+        <p class="tier-price free">Complimentary</p>
+      </div>
+      <div class="tier-body">
+        <p class="tier-desc">A structured intake and 20-minute call that maps your current business system and identifies exactly where things are breaking down. You receive a written diagnostic with findings and a clear recommended path forward.</p>
+        <ul class="tier-features">
+          <li>Pre-call intake questionnaire</li>
+          <li>20-minute diagnostic call</li>
+          <li>Written gap analysis + recommendation doc</li>
+          <li>Named system recommendation with stack</li>
+          <li>No obligation to continue</li>
+        </ul>
+        <a href="https://tally.so/r/aQZzJB" target="_blank" class="tier-btn dark">Fill out intake form</a>
+        <a href="https://calendly.com/euleaverse/30min" target="_blank" class="tier-btn outline">Book diagnostic call</a>
+      </div>
+    </div>
+
+    <div class="tier featured fade-in">
+      <div class="tier-header">
+        <span class="tier-badge badge-popular">Most requested</span>
+        <h3 class="tier-name serif">Foundation<br>Build</h3>
+        <p class="tier-price paid">$1,500 – $3,000</p>
+      </div>
+      <div class="tier-body">
+        <p class="tier-desc">A complete backend system built for your business in four weeks. Client pipeline, automated follow-up sequences, intake forms, email automations, templates, and a plain-language SOP so you know exactly how it all runs.</p>
+        <ul class="tier-features">
+          <li>CRM pipeline (Notion)</li>
+          <li>Automated email sequences (Mailchimp)</li>
+          <li>Intake form connected to pipeline (Tally)</li>
+          <li>Inquiry response templates</li>
+          <li>Operations SOP</li>
+          <li>30-minute handoff call</li>
+        </ul>
+        <a href="https://calendly.com/euleaverse/30min" target="_blank" class="tier-btn dark">Start with a diagnostic</a>
+      </div>
+    </div>
+
+    <div class="tier fade-in">
+      <div class="tier-header">
+        <span class="tier-badge badge-team">For growing teams</span>
+        <h3 class="tier-name serif">Full Systems<br>Overhaul</h3>
+        <p class="tier-price paid">$4,000 – $8,000+</p>
+      </div>
+      <div class="tier-body">
+        <p class="tier-desc">Comprehensive operational infrastructure for businesses with a team or complex multi-system needs. Covers operations, reporting, workflows, SOPs, and team onboarding across a 6–8 week engagement.</p>
+        <ul class="tier-features">
+          <li>Full operational audit</li>
+          <li>Multi-tool system architecture</li>
+          <li>KPI dashboard + reporting setup</li>
+          <li>Team onboarding + role documentation</li>
+          <li>Content systems + distribution frameworks</li>
+          <li>Ongoing retainer available</li>
+        </ul>
+        <a href="https://calendly.com/euleaverse/30min" target="_blank" class="tier-btn outline">Start with a diagnostic</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="how fade-in" id="how">
+  <p class="section-label">How it works</p>
+  <h2 class="section-title serif">Simple by design.</h2>
+  <div class="how-grid">
+    <div class="how-step fade-in">
+      <p class="how-num serif">01</p>
+      <p class="how-title">Fill out the intake form</p>
+      <p class="how-desc">Takes five minutes. Tells us what you do, what feels broken, and where you want to be. No prep needed — just answer honestly.</p>
+    </div>
+    <div class="how-step fade-in">
+      <p class="how-num serif">02</p>
+      <p class="how-title">We talk for 20 minutes</p>
+      <p class="how-desc">A focused diagnostic call. We ask the right questions and listen. No sales pitch — just clarity on what's actually happening in your business.</p>
+    </div>
+    <div class="how-step fade-in">
+      <p class="how-num serif">03</p>
+      <p class="how-title">You receive your diagnostic</p>
+      <p class="how-desc">A written overview of what we found, what it means, and what we'd recommend — delivered within 48 hours. Free regardless of next steps.</p>
+    </div>
+    <div class="how-step fade-in">
+      <p class="how-num serif">04</p>
+      <p class="how-title">If it's a fit, we build</p>
+      <p class="how-desc">Scoped engagement, defined deliverables, clear timeline. You stay in your zone of genius. We handle the backend infrastructure.</p>
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta fade-in">
+  <p class="footer-cta-eyebrow">Ready to start</p>
+  <h2 class="footer-cta-title serif">Ready to see what's<br><em>actually</em> in the way?</h2>
+  <p class="footer-cta-sub">The diagnostic is free. The clarity is immediate.<br>The build is optional.</p>
+  <div class="footer-cta-actions">
+    <a href="https://tally.so/r/aQZzJB" target="_blank" class="btn-gold">Fill out the intake form</a>
+    <a href="https://calendly.com/euleaverse/30min" target="_blank" class="btn-ghost">Or book the call directly →</a>
+  </div>
+  <p class="footer-cta-note">No commitment required · Response within 48 hours</p>
+</section>
+
+<footer>
+  <span class="footer-left serif">Systems Studio Workshop · Unitee Inc.</span>
+  <ul class="footer-links">
+    <li><a href="https://unitee7.github.io/euleanneespinal/" target="_blank">Portfolio</a></li>
+    <li><a href="#" target="_blank">Unitee Inc.</a></li>
+    <li><a href="#" target="_blank">MindScape</a></li>
+    <li><a href="mailto:euleaverse@gmail.com">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
