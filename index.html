@@ -194,36 +194,67 @@
   .btn-ghost-sm { display: inline-block; color: rgba(255,255,255,0.5); font-size: 12px; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px; transition: color 0.2s; padding-top: 11px; }
   .btn-ghost-sm:hover { color: #fff; }
  
-  /* Three lanes */
-  .lanes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .lane {
-    background: #fff; border: 0.5px solid var(--border);
-    border-radius: 12px; overflow: hidden;
-    transition: transform 0.2s;
+  /* Three lanes — accordion */
+  .lanes-grid { display: flex; flex-direction: column; gap: 0; border: 0.5px solid var(--border); border-radius: 12px; overflow: hidden; }
+ 
+  .accordion-item { border-bottom: 0.5px solid var(--border); background: #fff; }
+  .accordion-item:last-child { border-bottom: none; }
+ 
+  .accordion-trigger {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 28px; background: none; border: none; cursor: pointer;
+    text-align: left; gap: 16px; transition: background 0.2s;
   }
-  .lane:hover { transform: translateY(-3px); }
-  .lane-header { padding: 28px 24px 20px; border-bottom: 0.5px solid var(--border); }
-  .lane-num {
-    font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300;
-    color: var(--gold); line-height: 1; margin-bottom: 12px;
+  .accordion-trigger:hover { background: var(--warm-gray); }
+  .accordion-trigger.open { background: var(--warm-gray); }
+ 
+  .accordion-trigger-left { display: flex; align-items: center; gap: 20px; }
+  .accordion-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300;
+    color: var(--gold); line-height: 1; min-width: 32px;
   }
-  .lane-badge { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; background: var(--warm-gray); color: var(--text-secondary); }
-  .lane-badge.featured { background: var(--navy); color: var(--gold-light); }
-  .lane-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--text-primary); margin-bottom: 6px; line-height: 1.2; }
-  .lane-tagline { font-size: 12px; color: var(--text-muted); font-style: italic; font-weight: 300; }
-  .lane-body { padding: 24px; }
-  .lane-desc { font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75; margin-bottom: 20px; min-height: 90px; }
-  .lane-trigger { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-  .lane-features { list-style: none; margin-bottom: 24px; }
-  .lane-features li { font-size: 12px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
-  .lane-features li:last-child { border-bottom: none; }
-  .lane-features li::before { content: '—'; color: var(--gold); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
-  .lane-price { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 16px; }
-  .lane-btn { display: block; width: 100%; text-align: center; padding: 13px; border-radius: 6px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+  .accordion-title-wrap { display: flex; flex-direction: column; gap: 3px; }
+  .accordion-badge { display: inline-block; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; background: var(--warm-gray); color: var(--text-secondary); width: fit-content; }
+  .accordion-badge.featured { background: var(--navy); color: var(--gold-light); }
+  .accordion-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--text-primary); line-height: 1.2; }
+  .accordion-tagline { font-size: 12px; color: var(--text-muted); font-style: italic; font-weight: 300; }
+ 
+  .accordion-trigger-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+  .accordion-price { font-size: 13px; font-weight: 500; color: var(--text-secondary); white-space: nowrap; }
+  .accordion-chevron {
+    width: 20px; height: 20px; border: 1.5px solid var(--border-dark); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: transform 0.3s, border-color 0.2s;
+  }
+  .accordion-chevron svg { width: 10px; height: 10px; stroke: var(--text-muted); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
+  .accordion-trigger.open .accordion-chevron { transform: rotate(180deg); border-color: var(--gold); }
+  .accordion-trigger.open .accordion-chevron svg { stroke: var(--gold); }
+ 
+  .accordion-body {
+    display: none; padding: 0 28px 28px 80px;
+    grid-template-columns: 1fr 1fr; gap: 32px;
+  }
+  .accordion-body.open { display: grid; }
+ 
+  .accordion-col-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .accordion-desc { font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75; margin-bottom: 20px; }
+  .accordion-list { list-style: none; margin-bottom: 0; }
+  .accordion-list li { font-size: 12px; color: var(--text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--border); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .accordion-list li:last-child { border-bottom: none; }
+  .accordion-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+  .accordion-cta { margin-top: 24px; padding-top: 20px; border-top: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .accordion-cta-price { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+  .lane-btn { display: inline-block; text-align: center; padding: 12px 24px; border-radius: 6px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
   .lane-btn.dark { background: var(--text-primary); color: var(--warm-white); border: none; }
   .lane-btn.dark:hover { background: var(--navy); }
   .lane-btn.outline { background: transparent; color: var(--text-primary); border: 1px solid var(--border-dark); }
   .lane-btn.outline:hover { border-color: var(--text-primary); background: var(--warm-gray); }
+ 
+  @media (max-width: 700px) {
+    .accordion-body { grid-template-columns: 1fr; padding-left: 28px; }
+    .accordion-trigger-right { flex-direction: column; align-items: flex-end; gap: 6px; }
+    .accordion-price { display: none; }
+  }
  
   /* HOW */
   .how { padding: 88px max(24px, calc((100% - 1100px) / 2)); border-bottom: 0.5px solid var(--border); background: var(--warm-gray); }
@@ -436,96 +467,138 @@
     </div>
   </div>
  
-  <!-- Three Lanes -->
+  <!-- Three Lanes — Accordion -->
   <div class="lanes-grid">
  
-    <div class="lane fade-in">
-      <div class="lane-header">
-        <p class="lane-num serif">01</p>
-        <span class="lane-badge">Clarity</span>
-        <h3 class="lane-name serif">Message &<br>Positioning</h3>
-        <p class="lane-tagline">When you have something worth selling but struggle to explain it</p>
-      </div>
-      <div class="lane-body">
-        <p class="lane-desc">Some businesses have a real offer — they just can't communicate it clearly. I help you define what you do, who it's for, and how to say it in a way that lands. This is the work that makes everything else easier.</p>
-        <p class="lane-trigger">You might need this if:</p>
-        <ul class="lane-features">
-          <li>People don't understand what you do after you explain it</li>
-          <li>You can't describe your services confidently in a room</li>
-          <li>Your offer has evolved but your message hasn't caught up</li>
-          <li>Referrals don't know how to describe you to others</li>
-        </ul>
-        <p class="lane-trigger" style="margin-top:16px;">What's included:</p>
-        <ul class="lane-features">
-          <li>Business clarity session</li>
-          <li>Business plan</li>
-          <li>Positioning statement</li>
-          <li>Steps and strategies</li>
-          <li>Branding direction</li>
-          <li>One round of revisions</li>
-        </ul>
-        <p class="lane-price">$1,000 – $2,500</p>
-        <a href="https://calendly.com/euleaverse/30min" target="_blank" class="lane-btn outline">Start with a diagnostic</a>
-      </div>
-    </div>
- 
-    <div class="lane fade-in">
-      <div class="lane-header">
-        <p class="lane-num serif">02</p>
-        <span class="lane-badge featured">Most requested</span>
-        <h3 class="lane-name serif">Systems &<br>Operations</h3>
-        <p class="lane-tagline">When the business runs on your memory and your time</p>
-      </div>
-      <div class="lane-body">
-        <p class="lane-desc">I map how your business actually runs — how clients come in, how they're taken care of, how follow-ups happen — and replace the informal version with something documented, repeatable, and not dependent on you holding it all together.</p>
-        <p class="lane-trigger">You might need this if:</p>
-        <ul class="lane-features">
-          <li>Leads or follow-ups fall through the cracks regularly</li>
-          <li>Clients get a different experience depending on the day</li>
-          <li>You can't step away without things slipping</li>
-          <li>Everything lives in your head with nowhere else to go</li>
-        </ul>
-        <p class="lane-trigger" style="margin-top:16px;">What's included:</p>
-        <ul class="lane-features">
-          <li>Full operational audit and process map</li>
-          <li>Client pipeline setup</li>
-          <li>Intake forms connected to your workflow</li>
-          <li>Automated follow-up sequences</li>
-          <li>Inquiry response and communication templates</li>
-          <li>SOPs written in plain language</li>
-          <li>30-minute handoff and walkthrough call</li>
-        </ul>
-        <p class="lane-price">$500 – $8,000</p>
-        <a href="https://calendly.com/euleaverse/30min" target="_blank" class="lane-btn dark">Start with a diagnostic</a>
+    <!-- Lane 01 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="accordion-trigger-left">
+          <span class="accordion-num serif">01</span>
+          <div class="accordion-title-wrap">
+            <span class="accordion-badge">Clarity</span>
+            <span class="accordion-name serif">Message & Positioning</span>
+            <span class="accordion-tagline">When you have something worth selling but struggle to explain it</span>
+          </div>
+        </div>
+        <div class="accordion-trigger-right">
+          <span class="accordion-price">$1,000 – $2,500</span>
+          <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </button>
+      <div class="accordion-body">
+        <div>
+          <p class="accordion-col-label">You might need this if:</p>
+          <ul class="accordion-list">
+            <li>People don't understand what you do after you explain it</li>
+            <li>You can't describe your services confidently in a room</li>
+            <li>Your offer has evolved but your message hasn't caught up</li>
+            <li>Referrals don't know how to describe you to others</li>
+          </ul>
+        </div>
+        <div>
+          <p class="accordion-col-label">What's included:</p>
+          <ul class="accordion-list">
+            <li>Business clarity session</li>
+            <li>Business plan</li>
+            <li>Positioning statement</li>
+            <li>Steps and strategies</li>
+            <li>Branding direction</li>
+            <li>One round of revisions</li>
+          </ul>
+          <div class="accordion-cta">
+            <span class="accordion-cta-price">$1,000 – $2,500</span>
+            <a href="https://calendly.com/euleaverse/30min" target="_blank" class="lane-btn outline">Start with a diagnostic</a>
+          </div>
+        </div>
       </div>
     </div>
  
-    <div class="lane fade-in">
-      <div class="lane-header">
-        <p class="lane-num serif">03</p>
-        <span class="lane-badge">Projects</span>
-        <h3 class="lane-name serif">One-Time<br>Builds</h3>
-        <p class="lane-tagline">When you need one specific thing built, start to finish</p>
+    <!-- Lane 02 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="accordion-trigger-left">
+          <span class="accordion-num serif">02</span>
+          <div class="accordion-title-wrap">
+            <span class="accordion-badge featured">Most requested</span>
+            <span class="accordion-name serif">Systems & Operations</span>
+            <span class="accordion-tagline">When the business runs on your memory and your time</span>
+          </div>
+        </div>
+        <div class="accordion-trigger-right">
+          <span class="accordion-price">$500 – $8,000</span>
+          <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </button>
+      <div class="accordion-body">
+        <div>
+          <p class="accordion-col-label">You might need this if:</p>
+          <ul class="accordion-list">
+            <li>Leads or follow-ups fall through the cracks regularly</li>
+            <li>Clients get a different experience depending on the day</li>
+            <li>You can't step away without things slipping</li>
+            <li>Everything lives in your head with nowhere else to go</li>
+          </ul>
+        </div>
+        <div>
+          <p class="accordion-col-label">What's included:</p>
+          <ul class="accordion-list">
+            <li>Full operational audit and process map</li>
+            <li>Client pipeline setup</li>
+            <li>Intake forms connected to your workflow</li>
+            <li>Automated follow-up sequences</li>
+            <li>Inquiry response and communication templates</li>
+            <li>SOPs written in plain language</li>
+            <li>30-minute handoff and walkthrough call</li>
+          </ul>
+          <div class="accordion-cta">
+            <span class="accordion-cta-price">$500 – $8,000</span>
+            <a href="https://calendly.com/euleaverse/30min" target="_blank" class="lane-btn dark">Start with a diagnostic</a>
+          </div>
+        </div>
       </div>
-      <div class="lane-body">
-        <p class="lane-desc">Not every engagement needs to be ongoing. Sometimes you need one specific thing planned and structured — a virtual event, a launch, an intake flow. I figure out the logistics, put together the strategy, and hand you a clear plan to execute.</p>
-        <p class="lane-trigger">Examples include:</p>
-        <ul class="lane-features">
-          <li>Virtual event strategy and logistics (networking events, branding events)</li>
-          <li>Booking or scheduling system plan</li>
-          <li>Content or product launch strategy</li>
-          <li>Onboarding flow or intake system design</li>
-          <li>Tool and workflow planning documentation</li>
-        </ul>
-        <p class="lane-trigger" style="margin-top:16px;">What's included:</p>
-        <ul class="lane-features">
-          <li>Scoped deliverable agreed on before work begins</li>
-          <li>Full logistics and strategy documentation</li>
-          <li>Step-by-step plan ready for execution</li>
-          <li>One round of revisions included</li>
-        </ul>
-        <p class="lane-price">$500 – $3,000</p>
-        <a href="https://calendly.com/euleaverse/30min" target="_blank" class="lane-btn outline">Start with a diagnostic</a>
+    </div>
+ 
+    <!-- Lane 03 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="accordion-trigger-left">
+          <span class="accordion-num serif">03</span>
+          <div class="accordion-title-wrap">
+            <span class="accordion-badge">Projects</span>
+            <span class="accordion-name serif">One-Time Builds</span>
+            <span class="accordion-tagline">When you need one specific thing planned and structured</span>
+          </div>
+        </div>
+        <div class="accordion-trigger-right">
+          <span class="accordion-price">$500 – $3,000</span>
+          <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </button>
+      <div class="accordion-body">
+        <div>
+          <p class="accordion-col-label">Examples include:</p>
+          <ul class="accordion-list">
+            <li>Virtual event strategy and logistics (networking events, branding events)</li>
+            <li>Booking or scheduling system plan</li>
+            <li>Content or product launch strategy</li>
+            <li>Onboarding flow or intake system design</li>
+            <li>Tool and workflow planning documentation</li>
+          </ul>
+        </div>
+        <div>
+          <p class="accordion-col-label">What's included:</p>
+          <ul class="accordion-list">
+            <li>Scoped deliverable agreed on before work begins</li>
+            <li>Full logistics and strategy documentation</li>
+            <li>Step-by-step plan ready for execution</li>
+            <li>One round of revisions included</li>
+          </ul>
+          <div class="accordion-cta">
+            <span class="accordion-cta-price">$500 – $3,000</span>
+            <a href="https://calendly.com/euleaverse/30min" target="_blank" class="lane-btn outline">Start with a diagnostic</a>
+          </div>
+        </div>
       </div>
     </div>
  
@@ -569,7 +642,7 @@
 <!-- FOOTER CTA -->
 <section class="footer-cta fade-in">
   <p class="footer-cta-eyebrow">Ready to start</p>
-  <h2 class="footer-cta-title serif">Ready to fix what's<br><em>actually</em> in the way?</h2>
+  <h2 class="footer-cta-title serif">Ready to see what's<br><em>actually</em> in the way?</h2>
   <p class="footer-cta-sub">The diagnostic is free. The clarity is immediate.<br>The build is optional.</p>
   <div class="footer-cta-actions">
     <a href="https://tally.so/r/aQZzJB" target="_blank" class="btn-gold">Fill out the intake form</a>
@@ -593,6 +666,19 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+ 
+  function toggleAccordion(trigger) {
+    const body = trigger.nextElementSibling;
+    const isOpen = trigger.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.accordion-trigger').forEach(t => t.classList.remove('open'));
+    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+    // Open clicked if it was closed
+    if (!isOpen) {
+      trigger.classList.add('open');
+      body.classList.add('open');
+    }
+  }
 </script>
 </body>
 </html>
