@@ -143,11 +143,31 @@
   .footer-meta { font-size: 13px; color: var(--text-muted); }
 
   @media (max-width: 760px) {
-    .hero-inner { flex-direction: column; }
+    nav .wrap { flex-wrap: wrap; row-gap: 8px; }
+    .nav-logo { font-size: 17px; }
+    .nav-links { gap: 16px; flex-wrap: wrap; }
+    .nav-links a { font-size: 13px; }
+
+    .hero-inner { flex-direction: column; padding: 40px 0 48px; gap: 28px; text-align: center; }
+    .hero-copy { align-items: center; max-width: 100%; }
+    .hero-copy p { max-width: 100%; }
+    .eyebrow { justify-content: center; }
     .hero-photo-wrap { order: -1; }
-    .about { flex-direction: column; gap: 20px; }
+    .hero-photo-frame { width: 170px; height: 170px; top: 10px; left: calc(50% - 73px); }
+    .hero-photo { width: 170px; height: 170px; left: -12px; }
+
+    .about { flex-direction: column; gap: 16px; padding: 48px 0; }
+    .about-label { flex: none; }
+
+    .strengths { padding: 48px 0; }
     .strengths-grid { grid-template-columns: 1fr; }
-    .contact { flex-direction: column; }
+    .strength-row { padding: 14px 0; }
+
+    .contact { flex-direction: column; padding: 56px 0; gap: 32px; }
+    .contact-copy, .contact-form { max-width: 100%; width: 100%; }
+    .contact-form { padding: 24px; }
+
+    footer .wrap { flex-direction: column; gap: 10px; }
   }
 </style>
 </head>
